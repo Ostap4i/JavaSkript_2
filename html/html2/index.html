@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Світлофор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .traffic-light {
+            width: 100px;
+            height: 300px;
+            background-color: black;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .light {
+            width: 60px;
+            height: 60px;
+            background-color: grey;
+            border-radius: 50%;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .red.active {
+            background-color: red;
+        }
+        .yellow.active {
+            background-color: yellow;
+        }
+        .green.active {
+            background-color: green;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="traffic-light">
+        <div class="light red" id="redLight"></div>
+        <div class="light yellow" id="yellowLight"></div>
+        <div class="light green" id="greenLight"></div>
+    </div>
+    <button class="button" id="toggleButton">Перемкнути</button>
+
+    <script>
+        const redLight = document.getElementById('redLight');
+        const yellowLight = document.getElementById('yellowLight');
+        const greenLight = document.getElementById('greenLight');
+        const toggleButton = document.getElementById('toggleButton');
+
+        let currentLight = 'red';
+
+        function switchLight() {
+            redLight.classList.remove('active');
+            yellowLight.classList.remove('active');
+            greenLight.classList.remove('active');
+
+            if (currentLight === 'red') {
+                redLight.classList.add('active');
+                currentLight = 'yellow';
+            } else if (currentLight === 'yellow') {
+                yellowLight.classList.add('active');
+                currentLight = 'green';
+            } else if (currentLight === 'green') {
+                greenLight.classList.add('active');
+                currentLight = 'red';
+            }
+        }
+
+        toggleButton.addEventListener('click', switchLight);
+
+        // Початковий стан світлофора
+        switchLight();
+    </script>
+
+</body>
+</html>

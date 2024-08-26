@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кнопки з підказками</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip {
+            visibility: hidden;
+            width: 150px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip.bottom {
+            bottom: auto;
+            top: 100%;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+        .tooltip-container:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="button-container">
+        <div class="tooltip-container">
+            <button class="button">Кнопка 1</button>
+            <div class="tooltip">Це підказка для кнопки 1</div>
+        </div>
+        <div class="tooltip-container">
+            <button class="button">Кнопка 2</button>
+            <div class="tooltip">Це підказка для кнопки 2</div>
+        </div>
+        <div class="tooltip-container">
+            <button class="button">Кнопка 3</button>
+            <div class="tooltip">Це підказка для кнопки 3</div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tooltip-container').forEach(container => {
+            const tooltip = container.querySelector('.tooltip');
+            container.addEventListener('mouseenter', () => {
+                const rect = tooltip.getBoundingClientRect();
+                if (rect.top < 0) {
+                    tooltip.classList.add('bottom');
+                } else {
+                    tooltip.classList.remove('bottom');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список книг</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 300px;
+        }
+        li {
+            padding: 15px;
+            margin: 5px 0;
+            background-color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        li:hover {
+            background-color: #f7f7f7;
+        }
+    </style>
+</head>
+<body>
+
+    <ul id="bookList">
+        <li>Книга 1</li>
+        <li>Книга 2</li>
+        <li>Книга 3</li>
+        <li>Книга 4</li>
+        <li>Книга 5</li>
+    </ul>
+
+    <script>
+        const bookList = document.getElementById('bookList');
+        let selectedBook = null;
+
+        bookList.addEventListener('click', function(event) {
+            const clickedBook = event.target;
+
+            if (clickedBook.tagName === 'LI') {
+                // Скидаємо колір попередньо вибраної книги
+                if (selectedBook) {
+                    selectedBook.style.backgroundColor = '#ffffff';
+                }
+
+                // Змінюємо колір поточної вибраної книги
+                clickedBook.style.backgroundColor = 'orange';
+                selectedBook = clickedBook;
+            }
+        });
+    </script>
+
+</body>
+</html>

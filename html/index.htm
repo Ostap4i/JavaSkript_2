@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Футбольне поле</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .field {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: green;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ball {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            background-image: url('https://i.imgur.com/eeQ9MfX.png');
+            background-size: cover;
+            transition: transform 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="field" id="field">
+        <div class="ball" id="ball"></div>
+    </div>
+
+    <script>
+        const field = document.getElementById('field');
+        const ball = document.getElementById('ball');
+        const ballSize = 100;
+
+        field.addEventListener('click', function(event) {
+            // Визначаємо координати кліку мишки відносно поля
+            let x = event.clientX - field.offsetLeft;
+            let y = event.clientY - field.offsetTop;
+
+            // Обмежуємо положення м'яча, щоб він не вилітав за межі поля
+            if (x < ballSize / 2) x = ballSize / 2;
+            if (x > field.clientWidth - ballSize / 2) x = field.clientWidth - ballSize / 2;
+            if (y < ballSize / 2) y = ballSize / 2;
+            if (y > field.clientHeight - ballSize / 2) y = field.clientHeight - ballSize / 2;
+
+            // Рухаємо м'яч, встановлюючи його на нове місце з урахуванням центру
+            ball.style.transform = `translate(${x - ballSize / 2}px, ${y - ballSize / 2}px)`;
+        });
+    </script>
+
+</body>
+</html>
